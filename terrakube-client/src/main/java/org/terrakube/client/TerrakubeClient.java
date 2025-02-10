@@ -6,6 +6,7 @@ import feign.RequestLine;
 import org.terrakube.client.model.organization.Organization;
 import org.terrakube.client.model.organization.job.Job;
 import org.terrakube.client.model.organization.job.JobRequest;
+import org.terrakube.client.model.organization.job.LogsRequest;
 import org.terrakube.client.model.organization.job.step.Step;
 import org.terrakube.client.model.organization.job.step.StepRequest;
 import org.terrakube.client.model.organization.module.Module;
@@ -105,4 +106,10 @@ public interface TerrakubeClient {
 
     @RequestLine("GET /api/v1/organization/{organizationId}/template/{templateId}")
     Response<Template> getTemplateById(@Param("organizationId") String organizationId, @Param("templateId") String templateId);
+
+    @RequestLine("POST /api/v1/{jobId}/setup-consumer-groups")
+    void setupConsumerGroups(@Param("jobId") String jobId);
+
+    @RequestLine("POST /api/v1/{jobId}")
+    void appendLogs(LogsRequest logRequests, @Param("jobId") String jobId);
 }
