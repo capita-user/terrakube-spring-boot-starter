@@ -7,8 +7,6 @@ import org.terrakube.client.model.organization.Organization;
 import org.terrakube.client.model.organization.job.Job;
 import org.terrakube.client.model.organization.job.JobRequest;
 import org.terrakube.client.model.organization.job.LogsRequest;
-import org.terrakube.client.model.organization.job.step.TfOutput;
-import org.terrakube.client.model.organization.job.step.TfOutputPath;
 import org.terrakube.client.model.organization.job.step.Step;
 import org.terrakube.client.model.organization.job.step.StepRequest;
 import org.terrakube.client.model.organization.module.Module;
@@ -119,8 +117,8 @@ public interface TerrakubeClient {
 
     @RequestLine("POST /tfoutput/v1/organization/{organizationId}/job/{jobId}/step/{stepId}")
     @Headers("Content-Type: application/vnd.api+json")
-    Response<TfOutputPath> uploadOutput(
-            TfOutput tfOutput,
+    String uploadOutput(
+            String tfOutput,
             @Param("organizationId") String organizationId,
             @Param("jobId") String jobId,
             @Param("stepId") String stepId
