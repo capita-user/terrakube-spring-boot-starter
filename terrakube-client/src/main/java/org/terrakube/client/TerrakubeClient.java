@@ -115,8 +115,8 @@ public interface TerrakubeClient {
 
     @RequestLine("POST /tfoutput/v1/organization/{organizationId}/job/{jobId}/step/{stepId}")
     @Headers("Content-Type: application/vnd.api+json")
-    Response<String> uploadOutput(
-            String tfOutput,
+    Response<TfOutputUrl> uploadOutput(
+            TfOutputRequest tfOutput,
             @Param("organizationId") String organizationId,
             @Param("jobId") String jobId,
             @Param("stepId") String stepId
