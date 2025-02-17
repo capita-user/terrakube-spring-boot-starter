@@ -115,4 +115,13 @@ public interface TerrakubeClient {
     @RequestLine("POST /logs")
     @Headers("Content-Type: application/vnd.api+json")
     void appendLogs(LogsRequest logRequests);
+
+    @RequestLine("POST /tfoutput/v1/organization/{organizationId}/job/{jobId}/step/{stepId}")
+    @Headers("Content-Type: multipart/form-data")
+    Response<String> uploadOutput(
+            @Param("organizationId") String organizationId,
+            @Param("jobId") String jobId,
+            @Param("stepId") String stepId,
+            @Param("file") byte[] file
+    );
 }
