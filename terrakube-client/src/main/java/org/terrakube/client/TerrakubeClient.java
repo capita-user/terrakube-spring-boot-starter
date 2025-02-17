@@ -108,11 +108,11 @@ public interface TerrakubeClient {
     @RequestLine("GET /api/v1/organization/{organizationId}/template/{templateId}")
     Response<Template> getTemplateById(@Param("organizationId") String organizationId, @Param("templateId") String templateId);
 
-    @RequestLine("POST /api/v1/logs/{jobId}/setup-consumer-groups")
+    @RequestLine("POST /logs/{jobId}/setup-consumer-groups")
     @Headers("Content-Type: application/vnd.api+json")
     void setupConsumerGroups(@Param("jobId") String jobId);
 
-    @RequestLine("POST /api/v1/logs")
+    @RequestLine("POST /logs")
     @Headers("Content-Type: application/vnd.api+json")
     void appendLogs(LogsRequest logRequests);
 }
