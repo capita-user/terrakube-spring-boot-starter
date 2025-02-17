@@ -1,5 +1,6 @@
 package org.terrakube.client;
 
+import feign.Body;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -109,6 +110,7 @@ public interface TerrakubeClient {
 
     @RequestLine("POST /api/v1/{jobId}/setup-consumer-groups")
     @Headers("Content-Type: application/vnd.api+json")
+    @Body("{}")  // Explicitly sending an empty JSON body
     void setupConsumerGroups(@Param("jobId") String jobId);
 
     @RequestLine("POST /api/v1/{jobId}")
