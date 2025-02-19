@@ -1,9 +1,6 @@
 package org.terrakube.client;
 
-import feign.Body;
-import feign.Headers;
-import feign.Param;
-import feign.RequestLine;
+import feign.*;
 import org.terrakube.client.model.organization.Organization;
 import org.terrakube.client.model.organization.job.*;
 import org.terrakube.client.model.organization.job.step.Step;
@@ -138,5 +135,5 @@ public interface TerrakubeClient {
     @RequestLine("PUT /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
     @Headers("Content-Type: application/octet-stream")
     @Body("planState")
-    Response<PlanStatePath> uploadPlanState(byte[] planState, @Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
+    Response<PlanStatePath> uploadPlanState(Request.Body planState, @Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
 }
