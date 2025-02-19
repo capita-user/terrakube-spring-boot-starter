@@ -129,8 +129,8 @@ public interface TerrakubeClient {
     @Headers("Content-Type: application/vnd.api+json")
     void createWorkspaceStateVersion(CreateStateVersionRequest createStateVersionRequest, @Param("workspaceId") String workspaceId);
 
-    @RequestLine("GET /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
-    byte[] getPlanState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
+    @RequestLine("GET {fullPath}")
+    byte[] getPlanState(@Param("fullPath") String fullPath);
 
     @RequestLine("PUT /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
     @Headers("Content-Type: application/octet-stream")
