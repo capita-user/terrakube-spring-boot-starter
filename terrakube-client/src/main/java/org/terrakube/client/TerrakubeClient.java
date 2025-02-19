@@ -125,7 +125,7 @@ public interface TerrakubeClient {
     @RequestLine("GET /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/state/terraform.tfstate")
     byte[] getCurrentState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId);
 
-    @RequestLine("POST /remote/tfe/v2/workspace/{workspaceId}/state-versions")
+    @RequestLine("POST /remote/tfe/v2/workspaces/{workspaceId}/state-versions")
     @Headers("Content-Type: application/vnd.api+json")
     void createWorkspaceStateVersion(CreateStateVersionRequest createStateVersionRequest, @Param("workspaceId") String workspaceId);
 
