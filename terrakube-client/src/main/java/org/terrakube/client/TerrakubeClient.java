@@ -123,14 +123,14 @@ public interface TerrakubeClient {
     );
 
     @RequestLine("GET /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/state/terraform.tfstate")
-    feign.Response getCurrentState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId);
+    byte[] getCurrentState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId);
 
     @RequestLine("POST /remote/tfe/v2/workspace/{workspaceId}/state-versions")
     @Headers("Content-Type: application/vnd.api+json")
     void createWorkspaceStateVersion(CreateStateVersionRequest createStateVersionRequest, @Param("workspaceId") String workspaceId);
 
     @RequestLine("GET /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
-    feign.Response getPlanState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
+    byte[] getPlanState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
 
     @RequestLine("PUT /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
     @Headers("Content-Type: application/octet-stream")

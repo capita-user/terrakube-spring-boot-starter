@@ -22,7 +22,11 @@ public class CustomFeignDecoder implements Decoder {
         if (type == byte[].class) {
 
             // Read binary response as byte[]
-            return response.body().asInputStream().readAllBytes();
+            Response.Body body = response.body();
+            if (body == null) {
+                return new byte[0];
+            }
+            return body.asInputStream().readAllBytes();
         }
 
         // If not binary, use GsonDecoder for normal JSON handling
