@@ -134,6 +134,5 @@ public interface TerrakubeClient {
 
     @RequestLine("PUT /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
     @Headers("Content-Type: application/octet-stream")
-    @Body("planState")
-    Response<PlanStatePath> uploadPlanState(Request.Body planState, @Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
+    Response<PlanStatePath> uploadPlanState(byte[] planState, @Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
 }
