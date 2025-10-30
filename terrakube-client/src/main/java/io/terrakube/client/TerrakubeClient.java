@@ -4,12 +4,9 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import io.terrakube.client.model.organization.Organization;
-import io.terrakube.client.model.organization.job.Job;
-import io.terrakube.client.model.organization.job.JobRequest;
+import io.terrakube.client.model.organization.job.*;
 import io.terrakube.client.model.organization.job.step.Step;
 import io.terrakube.client.model.organization.job.step.StepRequest;
-import io.terrakube.client.model.organization.job.Log;
-import io.terrakube.client.model.organization.job.LogsRequest;
 import io.terrakube.client.model.organization.module.Module;
 import io.terrakube.client.model.organization.module.ModuleRequest;
 import io.terrakube.client.model.organization.module.version.ModuleVersion;
@@ -24,6 +21,7 @@ import io.terrakube.client.model.organization.workspace.history.HistoryRequest;
 import io.terrakube.client.model.organization.workspace.variable.Variable;
 import io.terrakube.client.model.response.Response;
 import io.terrakube.client.model.response.ResponseWithInclude;
+import io.terrakube.client.model.state.CreateStateVersionRequest;
 
 import java.util.List;
 
@@ -119,4 +117,27 @@ public interface TerrakubeClient {
     @RequestLine("POST /logs")
     @Headers("Content-Type: application/vnd.api+json")
     void appendLogs(LogsRequest logRequests);
+
+    @RequestLine("POST /tfoutput/v1/organization/{organizationId}/job/{jobId}/step/{stepId}")
+    @Headers("Content-Type: application/vnd.api+json")
+    Response<String> uploadOutput(
+            TfOutputRequest tfOutput,
+            @Param("organizationId") String organizationId,
+            @Param("jobId") String jobId,
+            @Param("stepId") String stepId
+    );
+
+    @RequestLine("GET /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/state/terraform.tfstate")
+    byte[] getCurrentState(@Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId);
+
+    @RequestLine("POST /remote/tfe/v2/workspaces/{workspaceId}/state-versions")
+    @Headers("Content-Type: application/vnd.api+json")
+    void createWorkspaceStateVersion(CreateStateVersionRequest createStateVersionRequest, @Param("workspaceId") String workspaceId);
+
+    @RequestLine("GET {fullPath}")
+    byte[] getPlanState(@Param("fullPath") String fullPath);
+
+    @RequestLine("PUT /tfstate/v1/organization/{organizationId}/workspace/{workspacesId}/jobId/{jobId}/step/{stepId}/terraform.tfstate")
+    @Headers("Content-Type: application/octet-stream")
+    void uploadPlanState(byte[] planState, @Param("organizationId") String organizationId, @Param("workspacesId") String workspacesId, @Param("jobId") String jobId, @Param("stepId") String stepId);
 }

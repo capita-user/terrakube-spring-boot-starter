@@ -38,14 +38,14 @@ public class RestClientAutoConfiguration {
                     .build();
 
             restClient = Feign.builder()
-                    .encoder(new GsonEncoder())
-                    .decoder(new GsonDecoder())
+                    .encoder(new CustomFeignEncoder())
+                    .decoder(new CustomFeignDecoder())
                     .client(new OkHttpClient(customHttpClient))
                     .target(TerrakubeClient.class, restClientProperties.getUrl());
         }else{
             restClient = Feign.builder()
-                    .encoder(new GsonEncoder())
-                    .decoder(new GsonDecoder())
+                    .encoder(new CustomFeignEncoder())
+                    .decoder(new CustomFeignDecoder())
                     .logger(new Slf4jLogger())
                     .client(new OkHttpClient())
                     .logLevel(Logger.Level.FULL)
